@@ -77,6 +77,26 @@
 
         }
 
+        #nameInput {
+            display: block;
+            width: 300px;
+            height: 40px;
+            font-size: 20px;
+            margin: 20px auto;
+        }
+
+        #historyTable {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        #historyTable th, #historyTable td {
+            border: 1px solid black;
+            padding: 10px;
+            text-align: center;
+        }
+
     </style>
 
 </head>
@@ -87,7 +107,7 @@
 
     <p style="text-align: center;">Click "Start" and when the button turns red, click "Stop" as fast as possible!</p>
 
- 
+    <input type="text" id="nameInput" placeholder="Enter your name">
 
     <button id="startBtn">Start</button>
 
@@ -100,6 +120,18 @@
         <p>Fastest Reaction Recorded: <span id="bestTime">--</span> ms</p>
 
         <p>Your Reaction Time: <span id="reactionTime">--</span> ms</p>
+
+        <table id="historyTable">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Reaction Time (ms)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- History will be appended here -->
+            </tbody>
+        </table>
 
     </div>
 
@@ -122,6 +154,10 @@
         const reactionTimeDisplay = document.getElementById("reactionTime");
 
         const bestTimeDisplay = document.getElementById("bestTime");
+
+        const nameInput = document.getElementById("nameInput");
+
+        const historyTableBody = document.querySelector("#historyTable tbody");
 
  
 
@@ -172,6 +208,11 @@
                     bestTimeDisplay.textContent = bestTime + " ms";
 
                 }
+
+                const name = nameInput.value || "Anonymous";
+                const newRow = document.createElement("tr");
+                newRow.innerHTML = `<td>${name}</td><td>${reactionTime}</td>`;
+                historyTableBody.appendChild(newRow);
 
             }
 
